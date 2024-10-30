@@ -12,7 +12,7 @@ class VideoCreator:
     def create_video_from_images(self, image_folder, output_video):
         """Creates an MP4 video from BMP images in the specified folder."""
         gst_source_command = [
-            "gst-launch-1.0",
+            "/usr/bin/gst-launch-1.0",
             "multifilesrc", f"location={image_folder}/%08d.bmp",
             "caps=\"image/bmp,framerate=30/1\"",
             "!", "avdec_bmp",

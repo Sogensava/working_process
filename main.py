@@ -13,16 +13,18 @@ uncompressor = FrameExtractor(output_directory,max_threads=12)
 ws_handler = workspaceHandler(dataset_directory,output_directory)
 compressor.gather_folders()
 
+tracker_name = 'NCC_Python'
+
 def evaluate():
     cwd=os.getcwd()
     os.chdir(os.path.join(cwd,output_directory))
-    os.system(f'vot evaluate -f NCCPython')
+    os.system(f'vot evaluate -f' + tracker_name)
     os.chdir(cwd)
 
 def analysis(name):
     cwd=os.getcwd()
     os.chdir(os.path.join(cwd,output_directory))
-    os.system(f'vot analysis --nocache --name {name} --format json NCCPython')
+    os.system(f'vot analysis --nocache --name {name} --format json ' + tracker_name)
     os.chdir(cwd)
 
 for bitrate in codec.bitrate_step :

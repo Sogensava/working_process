@@ -219,3 +219,6 @@ CMD ["bash"]
 # COPY ./util.py DCFNet_pytorch/track/util.py
 
 RUN pip install opencv-contrib-python==4.5.1.48
+
+WORKDIR /home
+RUN mkdir dataset

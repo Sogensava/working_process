@@ -162,6 +162,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # GStreamer 
 RUN apt-get update && apt-get install --no-install-recommends -y \
+    git \
+    curl \
+    wget \
+    gcc \
+    g++ \
     libx264-dev \
     libjpeg-dev \
     libgstreamer1.0-dev \
@@ -177,6 +182,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     xdg-utils \
     gedit \
     && rm -rf /var/lib/apt/lists/*
+
 
 #VOT
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -201,26 +207,7 @@ COPY dockerfiles/__init__.py /home/toolkit/vot/dataset/__init__.py
 #Create VOT WORKSPACE
 RUN vot initialize mystack --workspace vot_ws
 
-#Copy Trackers.ini
-#COPY ../../../dockerfiles/trackers.ini /home/vot_ws/trackers.ini
-# setup entrypoint
 CMD ["bash"]
-
-
-#######
-# RUN mkdir /home/vot_ws
-# RUN git clone https://github.com/votchallenge/toolkit /home/toolkit
-# WORKDIR /home/toolkit
-# RUN cd /home/toolkit && python /home/toolkit/setup.py install
-# WORKDIR /home/vot_ws
-# RUN vot initialize vot2022/shorttermbox --workspace .
-# RUN git clone https://github.com/foolwood/DCFNet_pytorch.git
-# RUN cd DCFNet_pytorch/track && wget https://raw.githubusercontent.com/votchallenge/integration/refs/heads/master/python/vot.py
-# COPY ./run_vot.py DCFNet_pytorch/track
-# COPY ./trackers.ini trackers.ini
-# COPY ./DCFNet.py DCFNet_pytorch/track/DCFNet.py
-# COPY ./net.py DCFNet_pytorch/track/net.py
-# COPY ./util.py DCFNet_pytorch/track/util.py
 
 # TRACKERS
 
@@ -232,3 +219,6 @@ RUN cd ./snapshot
 RUN gdown 1tBllNtv-90Ih2EP_lnRCBzxnZeFPRnPx
 WORKDIR /home/SiamDW
 RUN cp /home/SiamDW/trackers.ini /home/vot_ws/trackers.ini
+
+WORKDIR /home
+RUN mkdir dataset
